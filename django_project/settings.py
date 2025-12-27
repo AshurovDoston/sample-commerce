@@ -29,10 +29,12 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",
     "home.apps.HomeConfig",
     "products.apps.ProductsConfig",
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -116,3 +118,5 @@ LOGOUT_REDIRECT_URL = "/accounts/logout/"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+INTERNAL_IPS = [config("INTERNAL_IPS", default="127.0.0.1")]

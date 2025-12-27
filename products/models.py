@@ -34,6 +34,10 @@ class Product(models.Model):
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
 
+    def primary_image(self):
+        image = self.rasmlar.filter(is_primary=True).first()
+        return image or self.rasmlar.first()
+
     class Meta:
         verbose_name = "Product"
         verbose_name_plural = "Products"
@@ -49,7 +53,7 @@ class Product(models.Model):
     
 
 class ProductImage(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="rasmlar")
     image = models.ImageField(upload_to="products/%Y/%m/")
     alt_text = models.CharField(max_length=200, blank=True)
     is_primary = models.BooleanField(default=False)
@@ -63,5 +67,4 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return f"{self.product.name} Image {self.order}"
-    
     
