@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "accounts.apps.AccountsConfig",
     "home.apps.HomeConfig",
+    "products.apps.ProductsConfig",
 ]
 
 MIDDLEWARE = [
@@ -112,3 +113,6 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/accounts/logout/"
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
