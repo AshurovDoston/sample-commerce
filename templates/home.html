@@ -5,8 +5,9 @@
 {% block content %}
     {% if user.is_authenticated %}
         <h2>Welcome, {{ user.username }}!</h2>
+        <a href="{% url 'products:product_list' %}">See all available products</a>
     {% else %}
         <h2>Welcome, Guest!</h2>
     {% endif %}
-    {{ page_title }}
+    <h3>{{ page_title }}</h3>
 {% endblock content %}

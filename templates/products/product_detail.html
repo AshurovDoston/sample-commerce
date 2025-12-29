@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}{{ product.name }} - Product Details{% endblock %}
+
+{% block content %}
+<h1>{{ product.name }}</h1>
+<p>Category: {{ product.category.name }}</p>
+<p>{{ product.description }}</p>
+<p>Price: {{ product.price|intcomma }} UZS</p>
+<p>In Stock: {{ product.stock_quantity }}</p>
+
+<h2>Images</h2>
+{% for image in product.rasmlar.all %}
+    <img src="{{ image.image.url }}" alt="{{ product.alt_text }}" width="200">
+{% empty %}
+    <p>No images available for this product.</p>
+{% endfor %}
+<hr>
+<a href="{% url 'products:product_list' %}">Back to Product List</a>
+{% endblock %}

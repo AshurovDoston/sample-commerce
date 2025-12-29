@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "home.apps.HomeConfig",
     "products.apps.ProductsConfig",
     "debug_toolbar",
+    "django.contrib.humanize",
 ]
 
 MIDDLEWARE = [
