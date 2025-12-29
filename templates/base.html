@@ -1,28 +1,88 @@
+{% load static %}
 <!DOCTYPE html>
-
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}My Site{% endblock %}</title>
+    <title>{% block title %}Gamzan{% endblock %}</title>
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/navigation.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/utilities.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/products.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
   </head>
   <body>
-    <nav>
-        <h2><a href="{% url 'home' %}">My Site</a></h2>
+    <header class="header">
+      <div class="header-container">
+        <div class="logo">
+          <a href="{% url 'home' %}">Gamzan</a>
+        </div>
 
-        {% if user.is_authenticated %}
-            <span>Hello {{ user.username }}</span>
-            <form method="post" action="{% url 'logout' %}" style="display: inline;">
+        <nav class="nav">
+          <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'products:product_list' %}">Products</a></li>
+          </ul>
+
+          <div class="user-menu">
+            {% if user.is_authenticated %}
+              <span class="user-greeting">Hello, <strong>{{ user.username }}</strong></span>
+              <form method="post" action="{% url 'logout' %}" class="logout-form">
                 {% csrf_token %}
                 <button type="submit" class="logout-btn">Logout</button>
-            </form>
+              </form>
+            {% else %}
+              <div class="auth-buttons">
+                <a href="{% url 'login' %}" class="btn btn-secondary btn-sm">Login</a>
+                <a href="{% url 'signup' %}" class="btn btn-primary btn-sm">Sign Up</a>
+              </div>
+            {% endif %}
+          </div>
+        </nav>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" onclick="toggleMobileMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul class="mobile-menu-links">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'products:product_list' %}">Products</a></li>
+      </ul>
+      <div class="mobile-menu-auth">
+        {% if user.is_authenticated %}
+          <div class="mobile-user-greeting">Hello, <strong>{{ user.username }}</strong></div>
+          <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-secondary w-full">Logout</button>
+          </form>
         {% else %}
-            <span>You are not logged in.</span>
-            <a href="{% url 'login' %}">Login</a>
-            <a href="{% url 'signup' %}">Sign Up</a>
+          <a href="{% url 'login' %}" class="btn btn-secondary">Login</a>
+          <a href="{% url 'signup' %}" class="btn btn-primary">Sign Up</a>
         {% endif %}
-    </nav>
-    {% block content %}
-    {% endblock %}
+      </div>
+    </div>
+
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+
+    <script>
+      function toggleMobileMenu() {
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        const menu = document.getElementById('mobileMenu');
+        toggle.classList.toggle('active');
+        menu.classList.toggle('active');
+      }
+    </script>
   </body>
 </html>
