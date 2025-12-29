@@ -1,13 +1,21 @@
 {% extends "base.html" %}
 
-{% block title %}Logged Out{% endblock %}
+{% block title %}Logged Out - My Site{% endblock %}
 
 {% block content %}
-
-<h2>You've been logged out</h2>
-<h4>Thanks for using our site! You have been successfully logged out.</h4>
-
-<a href="{% url 'login' %}">Log in again</a>
-<a href="{% url 'home' %}">Go to Home</a>
-
+<div class="message-page">
+  <div class="message-container">
+    <div class="message-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
+    <h2>You've been logged out</h2>
+    <p>Thanks for using our site! You have been successfully logged out.</p>
+    <div class="message-actions">
+      <a href="{% url 'login' %}" class="btn btn-primary">Log in again</a>
+      <a href="{% url 'home' %}" class="btn btn-secondary">Go to Home</a>
+    </div>
+  </div>
+</div>
 {% endblock content %}

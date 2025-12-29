@@ -1,0 +1,303 @@
+/* ==========================================================================
+   Forms CSS - Authentication and form styles
+   ========================================================================== */
+
+/* Form Container
+   ========================================================================== */
+.form-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - var(--header-height));
+  padding: var(--spacing-4);
+}
+
+.form-container {
+  width: 100%;
+  max-width: 420px;
+  background-color: var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-8);
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: var(--spacing-8);
+}
+
+.form-header h1,
+.form-header h2 {
+  margin-bottom: var(--spacing-2);
+}
+
+.form-header p {
+  color: var(--color-gray-500);
+  margin-bottom: 0;
+}
+
+/* Form Elements
+   ========================================================================== */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.form-label {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-gray-700);
+}
+
+.form-input {
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4);
+  font-size: var(--font-size-base);
+  color: var(--color-gray-900);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-lighter);
+}
+
+.form-input::placeholder {
+  color: var(--color-gray-400);
+}
+
+.form-input:disabled {
+  background-color: var(--color-gray-100);
+  cursor: not-allowed;
+}
+
+/* Django Form Styling (as_p renders p tags with inputs)
+   ========================================================================== */
+.django-form p {
+  margin-bottom: var(--spacing-4);
+}
+
+.django-form label {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-gray-700);
+  margin-bottom: var(--spacing-2);
+}
+
+.django-form input[type="text"],
+.django-form input[type="email"],
+.django-form input[type="password"],
+.django-form input[type="number"],
+.django-form input[type="tel"],
+.django-form textarea,
+.django-form select {
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4);
+  font-size: var(--font-size-base);
+  font-family: var(--font-family);
+  color: var(--color-gray-900);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.django-form input[type="text"]:focus,
+.django-form input[type="email"]:focus,
+.django-form input[type="password"]:focus,
+.django-form input[type="number"]:focus,
+.django-form input[type="tel"]:focus,
+.django-form textarea:focus,
+.django-form select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-lighter);
+}
+
+.django-form select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right var(--spacing-3) center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: var(--spacing-10);
+}
+
+/* Help Text
+   ========================================================================== */
+.django-form .helptext {
+  display: block;
+  font-size: var(--font-size-xs);
+  color: var(--color-gray-500);
+  margin-top: var(--spacing-1);
+}
+
+.django-form ul.helptext,
+.django-form .helptext ul {
+  list-style: disc;
+  padding-left: var(--spacing-4);
+  margin-top: var(--spacing-1);
+}
+
+.django-form .helptext li {
+  font-size: var(--font-size-xs);
+  color: var(--color-gray-500);
+  margin-bottom: var(--spacing-1);
+}
+
+/* Error Messages
+   ========================================================================== */
+.django-form .errorlist {
+  list-style: none;
+  padding: 0;
+  margin: var(--spacing-2) 0 0 0;
+}
+
+.django-form .errorlist li {
+  font-size: var(--font-size-sm);
+  color: var(--color-error);
+  margin-bottom: var(--spacing-1);
+}
+
+.form-error {
+  background-color: var(--color-error-light);
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-3) var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+}
+
+.form-error p {
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+  margin: 0;
+}
+
+/* Submit Button
+   ========================================================================== */
+.form-submit {
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-6);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-top: var(--spacing-4);
+}
+
+.form-submit:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.form-submit:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-primary-lighter);
+}
+
+.form-submit:disabled {
+  background-color: var(--color-gray-400);
+  cursor: not-allowed;
+}
+
+/* Form Footer (links below form)
+   ========================================================================== */
+.form-footer {
+  text-align: center;
+  margin-top: var(--spacing-6);
+  padding-top: var(--spacing-6);
+  border-top: 1px solid var(--color-gray-200);
+}
+
+.form-footer p {
+  color: var(--color-gray-500);
+  font-size: var(--font-size-sm);
+  margin: 0;
+}
+
+.form-footer a {
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.form-footer a:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+/* Success Message Page (logged out)
+   ========================================================================== */
+.message-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - var(--header-height));
+  padding: var(--spacing-4);
+}
+
+.message-container {
+  text-align: center;
+  max-width: 420px;
+  background-color: var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-10);
+}
+
+.message-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--spacing-6);
+  background-color: var(--color-success-light);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message-icon svg {
+  width: 32px;
+  height: 32px;
+  color: var(--color-success);
+}
+
+.message-container h2 {
+  margin-bottom: var(--spacing-3);
+}
+
+.message-container p {
+  color: var(--color-gray-500);
+  margin-bottom: var(--spacing-6);
+}
+
+.message-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+@media (min-width: 768px) {
+  .form-container {
+    padding: var(--spacing-10);
+  }
+
+  .message-actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+}

@@ -1,12 +1,121 @@
 {% extends "base.html" %}
+{% load humanize %}
 
-{% block title %}Home - My Site{% endblock title %}
+{% block title %}Gamzan - Shop the Latest Trends{% endblock title %}
 
 {% block content %}
-    {% if user.is_authenticated %}
-        <h2>Welcome, {{ user.username }}!</h2>
-    {% else %}
-        <h2>Welcome, Guest!</h2>
-    {% endif %}
-    {{ page_title }}
+<!-- Personalized Banner for Logged-in Users -->
+{% if user.is_authenticated %}
+<div class="welcome-banner">
+  <div class="container">
+    <p>Welcome back, <strong>{{ user.username }}</strong>! Ready to continue shopping?</p>
+  </div>
+</div>
+{% endif %}
+
+<!-- Hero Section - Shopping Focused -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">Shop the <span class="highlight">Latest Trends</span></h1>
+    <p class="hero-subtitle">Discover quality products at amazing prices. Your next favorite item is just a click away.</p>
+    <div class="hero-actions">
+      <a href="{% url 'products:product_list' %}" class="btn btn-primary btn-lg">Shop Now</a>
+      {% if not user.is_authenticated %}
+      <a href="{% url 'signup' %}" class="btn btn-outline btn-lg">Create Account</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- Categories Section -->
+{% if categories %}
+<section class="categories-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Shop by Category</h2>
+      <p>Browse our wide range of product categories</p>
+    </div>
+    <div class="categories-grid">
+      {% for category in categories %}
+      <a href="{% url 'products:product_list' %}" class="category-card">
+        <div class="category-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+          </svg>
+        </div>
+        <h3>{{ category.name }}</h3>
+        <span class="category-count">{{ category.products.count }} products</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Featured Products Section -->
+{% if featured_products %}
+<section class="featured-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Featured Products</h2>
+      <p>Handpicked items just for you</p>
+      <a href="{% url 'products:product_list' %}" class="section-link">View All Products</a>
+    </div>
+    <div class="product-grid">
+      {% for product in featured_products %}
+      <article class="product-card">
+        <div class="product-card-image">
+          {% if product.primary_image %}
+            <img src="{{ product.primary_image.image.url }}" alt="{{ product.name }}">
+          {% else %}
+            <span class="no-image">No image</span>
+          {% endif %}
+        </div>
+        <div class="product-card-body">
+          {% if product.category %}
+            <span class="product-card-category">{{ product.category.name }}</span>
+          {% endif %}
+          <h3 class="product-card-title">
+            <a href="{% url 'products:product_detail' product.slug %}">{{ product.name }}</a>
+          </h3>
+          <p class="product-card-description">{{ product.description|truncatewords:12 }}</p>
+          <div class="product-card-footer">
+            <div class="product-card-price">
+              {{ product.price|intcomma }}<span class="currency">UZS</span>
+            </div>
+            <a href="{% url 'products:product_detail' product.slug %}" class="product-card-action">
+              View
+            </a>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Promo Banner -->
+<section class="promo-banner">
+  <div class="container">
+    <div class="promo-content">
+      <div class="promo-text">
+        <h2>Free Delivery on Orders Over 500,000 UZS</h2>
+        <p>Shop now and enjoy free shipping on qualifying orders</p>
+      </div>
+      <a href="{% url 'products:product_list' %}" class="btn btn-primary">Start Shopping</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section for Guests -->
+{% if not user.is_authenticated %}
+<section class="cta">
+  <div class="cta-content">
+    <h2>Join Gamzan Today</h2>
+    <p>Create an account to save your favorites and get personalized recommendations.</p>
+    <a href="{% url 'signup' %}" class="btn btn-lg">Sign Up Now</a>
+  </div>
+</section>
+{% endif %}
 {% endblock content %}
