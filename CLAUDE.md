@@ -60,6 +60,16 @@ This is a Django 6.0 e-commerce project using Python 3.13.
 
 **Templates**: Uses a project-level `templates/` directory with `registration/` subdirectory for auth templates. Uses `humanize` filter for price formatting (UZS currency).
 
+**CSS Architecture**: Page-based CSS organization in `static/css/`:
+- `base.css` - CSS variables (colors, spacing, typography), reset, buttons, cards
+- `navigation.css` - Header, nav bar, mobile menu
+- `products.css` - Product grid, cards, detail page styles
+- `forms.css` - Login/signup form styling
+- `home.css` - Homepage sections (hero, categories, featured products)
+- `utilities.css` - Helper classes (spacing, flexbox, visibility)
+
+All colors use CSS custom properties (e.g., `--color-primary: #2563eb`) defined in `base.css` for easy theming.
+
 **Environment Configuration**: Uses `python-decouple` for environment variables. Create a `.env` file for `DEBUG`, `ALLOWED_HOSTS`, and `INTERNAL_IPS`.
 
 **Debug Toolbar**: Enabled for development via `django-debug-toolbar`. Requires `INTERNAL_IPS` in settings.
